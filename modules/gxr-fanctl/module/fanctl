@@ -1,0 +1,66 @@
+#!/system/bin/sh
+# gxr-fanctl CLI.  Run as root:  su -c /data/adb/modules/gxr-fanctl/fanctl <cmd>
+MODDIR=${0%/*}
+DATA=/data/adb/gxr-fanctl
+CONF=$DATA/config.conf
+FAN=/sys/class/sec_fan/fan
+
+usage() {
+cat <<EOF
+fanctl status                 show mode, step, temp, rpm
+fanctl mode <stock|max|fixed|curve>
+fanctl step <0-7>             fixed step (switches to MODE=fixed)
+fanctl curve "36:2 40:3 ..."  set curve (switches to MODE=curve)
+fanctl set <KEY> <VALUE>      set any config key
+fanctl get                    print config
+fanctl log                    print daemon log
+fanctl start|stop|restart     control daemon
+fanctl reset                  restore default config
+EOF
+}
+
+setkey() {
+    k=$1; v=$2
+    case "$k" in MODE|FIXED_STEP|CURVE|MIN_STEP|HYST|INTERVAL|SENSORS|FAILSAFE_STEP) ;; *) echo "bad key $k"; exit 1;; esac
+    case "$v" in *[!A-Za-z0-9:\ *_.-]*) echo "bad value"; exit 1;; esac
+    if grep -q "^$k=" $CONF; then
+        sed -i "s|^$k=.*|$k=\"$v\"|" $CONF
+    else
+        echo "$k=\"$v\"" >> $CONF
+    fi
+}
+
+running() { [ -f $DATA/fand.pid ] && kill -0 "$(cat $DATA/fand.pid)" 2>/dev/null; }
+start() { running && return; nohup sh $MODDIR/fand.sh >/dev/null 2>&1 & sleep 1; }
+stop() {
+    running || return
+    kill "$(cat $DATA/fand.pid)"
+    i=0; while running && [ $i -lt 30 ]; do sleep 1; i=$((i+1)); done
+}
+
+[ -f $CONF ] || { mkdir -p $DATA; cp $MODDIR/config.default.conf $CONF; }
+
+case "$1" in
+status)
+    running && echo "daemon=running" || echo "daemon=stopped"
+    cat $DATA/status 2>/dev/null
+    cat $FAN/get_status 2>/dev/null; echo
+    echo "node_owner=$(stat -c %U $FAN/step)";;
+mode)
+    case "$2" in stock|max|fixed|curve) setkey MODE $2; echo "MODE=$2";; *) usage; exit 1;; esac;;
+step)
+    case "$2" in [0-7]) setkey FIXED_STEP $2; setkey MODE fixed; echo "fixed step $2";; *) echo "step 0-7"; exit 1;; esac;;
+curve)
+    [ -n "$2" ] || { usage; exit 1; }
+    for p in $2; do case "$p" in *[!0-9:]*|*:*:*|:*|*:) echo "bad pair $p"; exit 1;; esac
+        case "${p##*:}" in [0-7]) ;; *) echo "step must be 0-7 in $p"; exit 1;; esac; done
+    setkey CURVE "$2"; setkey MODE curve; echo "CURVE=$2";;
+set) [ -n "$3" ] || { usage; exit 1; }; setkey "$2" "$3";;
+get) cat $CONF;;
+log) cat $DATA/fand.log;;
+start) start; running && echo started;;
+stop) stop; echo stopped;;
+restart) stop; start; running && echo restarted;;
+reset) cp $MODDIR/config.default.conf $CONF; echo "config reset";;
+*) usage;;
+esac

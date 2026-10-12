@@ -1,0 +1,6 @@
+id=gxr-no-lowlight_toast
+name=Galaxy XR No Low-Light Toast
+version=v1.0.0
+versionCode=1
+author=BreadDoesStuff
+description=Disables XrSystemUI ambient light sensor pipeline so the "Brighten your area for better performance." low-light popup never appears (ix.sysui.light_sensor.enabled=false). No system files modified.

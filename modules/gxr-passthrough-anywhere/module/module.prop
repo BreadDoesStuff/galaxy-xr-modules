@@ -1,0 +1,6 @@
+id=gxr-passthrough-anywhere
+name=Galaxy XR Passthrough Anywhere
+version=v1.0.0
+versionCode=1
+author=BreadDoesStuff
+description=Headset double-tap toggles passthrough inside ANY XR app (full-space/OpenXR) without minimizing it. Drives the CPM passthrough node from a root daemon; no system files modified.

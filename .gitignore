@@ -1,0 +1,11 @@
+GXR-PATCHES.MD
+
+INSTRUCTIONS.MD
+PROGRESS.MD
+
+*.zip
+out/
+# src/
+tools/
+stubs/
+work/

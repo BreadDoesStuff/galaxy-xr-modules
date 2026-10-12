@@ -1,0 +1,17 @@
+# Galaxy XR KernelSU Modules
+
+KernelSU modules for the Samsung Galaxy XR (SM-I610) running AndroidXR. All modules are non-invasive — none modify system files.
+
+## Modules
+
+### Galaxy XR Fan Control (`gxr-fanctl`)
+Overrides the system fan speed (default: **max speed**). Includes a built-in configuration WebUI within KernelSU. You can set a custom fan step (0–7, where 0 is off and 7 is max) or a temperature-based fan speed curve.
+
+### Galaxy XR No Low-Light Toast (`gxr-no-lowlight-toast`)
+Disables the ambient light sensor pipeline so the **"Brighten your area for better performance."** low-light popup never appears.
+
+### Galaxy XR Passthrough Anywhere (`gxr-passthrough-anywhere`)
+Uses the headset's physical double-tap to toggle passthrough inside **any** XR app (full-space/OpenXR) without minimizing it. Double-tap again to return to the app.
+
+### Galaxy XR Camera Debug WebStream (`gxr-xrcam`)
+Streams all **13 physical headset cameras** as MJPEG over HTTP on port 8080 (`http://<headset-ip>:8080/`). All streams run simultaneously at the sensors' native rates (RGB ~65–68 fps, tracking 60 fps, eye 30 fps, ToF 10 fps). Starts at boot.

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Galaxy XR Fan Control</title>
+<style>
+ body{font-family:sans-serif;background:#111;color:#eee;margin:16px}
+ h2{margin:0 0 12px}
+ .card{background:#1d1d1d;border-radius:10px;padding:12px;margin-bottom:12px}
+ button{background:#2b6ef2;color:#fff;border:0;border-radius:6px;padding:8px 14px;margin:4px 4px 4px 0;font-size:15px}
+ button.sel{background:#1aa35a}
+ input{background:#000;color:#eee;border:1px solid #444;border-radius:6px;padding:6px;font-size:15px;width:100%;box-sizing:border-box}
+ pre{white-space:pre-wrap;font-size:13px;margin:0}
+ label{display:block;margin:8px 0 4px;color:#aaa;font-size:13px}
+</style>
+</head>
+<body>
+<h2>Galaxy XR Fan Control</h2>
+<div class="card"><pre id="status">loading...</pre></div>
+
+<div class="card">
+ <div>Mode</div>
+ <button data-m="curve">Curve</button><button data-m="max">Max</button><button data-m="fixed">Fixed</button><button data-m="stock">Stock (SSRM)</button>
+</div>
+
+<div class="card">
+ <label>Fixed step (0-7, PWM 0/85/90/95/100/110/120/140)</label>
+ <input id="fixed" type="number" min="0" max="7">
+ <label>Curve "tempC:step" pairs</label>
+ <input id="curve">
+ <label>Min step</label><input id="min" type="number" min="0" max="7">
+ <label>Hysteresis (C)</label><input id="hyst" type="number" min="0" max="20">
+ <label>Interval (s)</label><input id="interval" type="number" min="1" max="60">
+ <label>Sensors (thermal zone type globs)</label><input id="sensors">
+ <button id="save">Save</button><button id="aggr">Aggressive preset</button><button id="reset">Reset defaults</button>
+</div>
+
+<div class="card"><pre id="log"></pre></div>
+
+<script>
+const F='/data/adb/modules/gxr-fanctl/fanctl';
+let n=0;
+function exec(cmd){return new Promise(r=>{const cb='cb_'+(n++)+'_'+Date.now();
+ window[cb]=(code,out,err)=>{delete window[cb];r({code,out,err});};
+ try{ksu.exec(cmd,'{}',cb);}catch(e){r({code:-1,out:'',err:String(e)});}});}
+const q=s=>"'"+String(s).replace(/'/g,'')+"'";
+function cfg(txt){const o={};txt.split('\n').forEach(l=>{const m=l.match(/^([A-Z_]+)="?([^"]*)"?$/);if(m)o[m[1]]=m[2];});return o;}
+async function refresh(){
+ const s=await exec(F+' status');document.getElementById('status').textContent=s.out||s.err;
+ const c=cfg((await exec(F+' get')).out);
+ document.querySelectorAll('[data-m]').forEach(b=>b.classList.toggle('sel',b.dataset.m===c.MODE));
+ const set=(id,v)=>{const e=document.getElementById(id);if(document.activeElement!==e)e.value=v??'';};
+ set('fixed',c.FIXED_STEP);set('curve',c.CURVE);set('min',c.MIN_STEP);set('hyst',c.HYST);set('interval',c.INTERVAL);set('sensors',c.SENSORS);
+ const l=await exec('tail -n 15 /data/adb/gxr-fanctl/fand.log');document.getElementById('log').textContent=l.out;
+}
+document.querySelectorAll('[data-m]').forEach(b=>b.onclick=async()=>{await exec(F+' mode '+b.dataset.m);setTimeout(refresh,2500);});
+document.getElementById('save').onclick=async()=>{
+ const v=id=>document.getElementById(id).value;
+ const r=[];
+ r.push(await exec(F+' set FIXED_STEP '+q(v('fixed'))));
+ r.push(await exec(F+' set CURVE '+q(v('curve'))));
+ r.push(await exec(F+' set MIN_STEP '+q(v('min'))));
+ r.push(await exec(F+' set HYST '+q(v('hyst'))));
+ r.push(await exec(F+' set INTERVAL '+q(v('interval'))));
+ r.push(await exec(F+' set SENSORS '+q(v('sensors'))));
+ const bad=r.map(x=>x.out).filter(x=>x.trim()).join('\n');
+ if(bad)alert(bad);setTimeout(refresh,2500);};
+document.getElementById('aggr').onclick=async()=>{await exec(F+' curve '+q('34:3 38:5 42:6 45:7'));setTimeout(refresh,2500);};
+document.getElementById('reset').onclick=async()=>{await exec(F+' reset');setTimeout(refresh,2500);};
+refresh();setInterval(refresh,5000);
+</script>
+</body>
+</html>

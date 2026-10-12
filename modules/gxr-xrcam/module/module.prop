@@ -1,0 +1,6 @@
+id=gxr-xrcam
+name=Galaxy XR Camera Debug WebStream
+version=v1.0.0
+versionCode=1
+author=BreadDoesStuff
+description=Streams all 13 physical cameras (2x RGB passthrough, 6x tracking, 4x eye tracking, 1x dToF) of the Samsung Galaxy XR as MJPEG over HTTP on port 8080. Uses the QVR camera service; no system files modified.
