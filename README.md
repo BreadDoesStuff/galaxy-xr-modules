@@ -5,6 +5,11 @@ Requires a rooted Samsung Galaxy XR with [KernelSU-GXR](https://github.com/4uva4
 
 Add this repository as a source within KernelSU with the url: ``https://github.com/BreadDoesStuff/galaxy-xr-modules``.
 
+## CAUTION
+Modules marked with (*) are experimental and may either have negative **performance impacts** or unintended effects. Further testing is required.
+
+That being said, Rooting your headset also carries these risks.
+
 ## Modules
 
 ### Galaxy XR Fan Control (`gxr-fanctl`)
@@ -13,8 +18,14 @@ Overrides the system fan speed (default: **max speed**). Includes a built-in con
 ### Galaxy XR No Low-Light Toast (`gxr-no-lowlight-toast`)
 Disables the ambient light sensor pipeline so the **"Brighten your area for better performance."** low-light popup never appears.
 
-### Galaxy XR Passthrough Anywhere (`gxr-passthrough-anywhere`)
+### * Galaxy XR Passthrough Anywhere (`gxr-passthrough-anywhere`)
 Uses the headset's physical double-tap to toggle passthrough inside **any** XR app (full-space/OpenXR) without minimizing it. Double-tap again to return to the app.
+* Performance issues may occur while streaming PCVR. Further testing required. A possible refactor may be in order.
 
-### Galaxy XR Camera Debug WebStream (`gxr-xrcam`)
+### * Galaxy XR Camera Debug WebStream (`gxr-xrcam`)
 Streams all **13 physical headset cameras** as MJPEG over HTTP on port 8080 (`http://<headset-ip>:8080/`). All streams run simultaneously at the sensors' native rates (RGB ~65–68 fps, tracking 60 fps, eye 30 fps, ToF 10 fps). Starts at boot.
+* Running camera streams may have a performance impact on the headset. Further testing required. Purely for debug purposes.
+
+### * Galaxy XR Mic Gain Boost (`gxr-mic-gain-boost`)
++15 dB codec gain on the built-in handset mic (TX_DEC0). Zero runtime cost: mixer_paths.xml overlay only.
+* Tested ONLY with Virtual Desktop, with noise cancellation off. Further testing required with other applications.

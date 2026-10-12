@@ -1,0 +1,6 @@
+id=gxr-mic-gain-boost
+name=Galaxy XR Mic Gain Boost
+version=v1.0.0
+versionCode=1
+author=BreadDoesStuff
+description=+15 dB codec gain on the built-in handset mic (TX_DEC0). Zero runtime cost: mixer_paths.xml overlay only.

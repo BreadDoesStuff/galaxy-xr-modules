@@ -1,0 +1,7 @@
+{
+  "version": "v1.0.0",
+  "versionCode": 1,
+  "zipUrl": "https://github.com/BreadDoesStuff/galaxy-xr-modules/releases/download/gxr-fanctl%2Fv1.0.0/gxr-mic-gain-boost-v1.0.0.zip",
+  "changelog": "https://raw.githubusercontent.com/BreadDoesStuff/galaxy-xr-modules/main/changelogs/gxr-mic-gain-boost.md",
+  "sha256": "b90c3bf6243f1fe7dd067231f36a05a95998f9f81223dfd056f8442e426d4833"
+}
