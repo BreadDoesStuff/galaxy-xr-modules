@@ -3,6 +3,9 @@ GXR-PATCHES.MD
 INSTRUCTIONS.MD
 PROGRESS.MD
 
+built/
+update-hashes.ps1
+
 *.zip
 out/
 # src/

@@ -1,6 +1,6 @@
 id=gxr-fanctl
 name=Galaxy XR Fan Control
-version=v1.0
+version=v1.0.0
 versionCode=1
-author=bread
+author=BreadDoesStuff
 description=Configurable fan curve / max fan for Samsung Galaxy XR (SM-I610). Overrides SSRM control of /sys/class/sec_fan/fan/step. Config: /data/adb/gxr-fanctl/config.conf
