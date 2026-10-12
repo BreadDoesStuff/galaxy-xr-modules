@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "name": "Galaxy XR Modules",
+  "modules": [
+    {
+      "id": "gxr-fanctl",
+      "name": "Galaxy XR Fan Control",
+      "description": "Override the system fan speed (default: max speed), with a built-in configuration WebUI for custom steps or a temperature-based curve.",
+      "updateJson": "https://raw.githubusercontent.com/BreadDoesStuff/galaxy-xr-modules/main/updates/gxr-fanctl.json"
+    },
+    {
+      "id": "gxr-no-lowlight-toast",
+      "name": "Galaxy XR No Low-Light Toast",
+      "description": "Disable the ambient light sensor pipeline so the \"Brighten your area for better performance.\" low-light popup never appears.",
+      "updateJson": "https://raw.githubusercontent.com/BreadDoesStuff/galaxy-xr-modules/main/updates/gxr-no-lowlight-toast.json"
+    },
+    {
+      "id": "gxr-passthrough-anywhere",
+      "name": "Galaxy XR Passthrough Anywhere",
+      "description": "Toggle passthrough inside any XR app with the headset's physical double-tap, without minimizing it. Double-tap again to return to the app.",
+      "updateJson": "https://raw.githubusercontent.com/BreadDoesStuff/galaxy-xr-modules/main/updates/gxr-passthrough-anywhere.json"
+    },
+    {
+      "id": "gxr-xrcam",
+      "name": "Galaxy XR Camera Debug WebStream",
+      "description": "Stream all 13 physical headset cameras as MJPEG over HTTP on port 8080 at native sensor rates, starting at boot.",
+      "updateJson": "https://raw.githubusercontent.com/BreadDoesStuff/galaxy-xr-modules/main/updates/gxr-xrcam.json"
+    }
+  ]
+}
