@@ -28,4 +28,5 @@ Streams all **13 physical headset cameras** as MJPEG over HTTP on port 8080 (`ht
 
 ### * Galaxy XR Mic Gain Boost (`gxr-mic-gain-boost`)
 +15 dB codec gain on the built-in handset mic (TX_DEC0). Zero runtime cost: mixer_paths.xml overlay only.
-* Tested ONLY with Virtual Desktop, with noise cancellation off. Further testing required with other applications.
+* Tested ONLY with **Virtual Desktop**, with noise cancellation off. Further testing required with other applications.
+* TESTED: Unwantingly raises the microphone level when Screen Recording with microphone enabled. **ONLY USE THIS MODULE IF YOU ONLY USE THE MICROPHONE WHILE STREAMING PCVR WITHOUT ANY MIC BOOSTING FIXES.** 
