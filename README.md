@@ -28,4 +28,4 @@ Streams all **13 physical headset cameras** as MJPEG over HTTP on port 8080 (`ht
 
 ### * [Galaxy XR Mic Gain Boost (`gxr-mic-gain-boost`)](modules\gxr-mic-gain-boost\README.md)
 +15 dB mic gain only while Virtual Desktop records (VOICE_PERFORMANCE source). Event-driven, no polling. Screen recording / other apps alone are untouched. MODE in config.conf.
-* Setting to one blala explain
+* Needs more testing.
