@@ -4,12 +4,11 @@ INSTRUCTIONS.MD
 PROGRESS.MD
 
 built/
+reference/
 update-hashes.ps1
 
 *.zip
 out/
 dump/
-# src/
 tools/
-stubs/
 work/
