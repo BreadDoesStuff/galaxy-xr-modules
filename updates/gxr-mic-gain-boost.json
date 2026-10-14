@@ -1,7 +1,7 @@
 {
-  "version": "v1.0.0",
-  "versionCode": 1,
-  "zipUrl": "https://github.com/BreadDoesStuff/galaxy-xr-modules/releases/download/gxr-mic-gain-boost%2Fv1.0.0/gxr-mic-gain-boost-v1.0.0.zip",
+  "version": "v1.1.0",
+  "versionCode": 2,
+  "zipUrl": "https://github.com/BreadDoesStuff/galaxy-xr-modules/releases/download/gxr-mic-gain-boost%2Fv1.1.0/gxr-mic-gain-boost-v1.1.0.zip",
   "changelog": "https://raw.githubusercontent.com/BreadDoesStuff/galaxy-xr-modules/main/changelogs/gxr-mic-gain-boost.md",
-  "sha256": "b90c3bf6243f1fe7dd067231f36a05a95998f9f81223dfd056f8442e426d4833"
+  "sha256": "4d27788b64d68c91da33e56f573bb58939bc285a2908bad9b8166f9e030f5f05"
 }

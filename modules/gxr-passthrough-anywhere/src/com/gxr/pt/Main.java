@@ -50,7 +50,7 @@ public final class Main {
         String mode = a.length > 0 ? a[0] : "daemon";
         if ("on".equals(mode)) { applyOn(); return; }
         if ("off".equals(mode)) { apply(0f, -2, false); return; }
-        String dir = a.length > 1 ? a[1] : "/data/adb/modules/gxr_passthrough_anywhere";
+        String dir = a.length > 1 ? a[1] : "/data/adb/modules/gxr-passthrough-anywhere";
         loadConfig(new File(dir, "config.conf"));
         startCtlThread(new File(dir, "ctl"));
         // start from a clean toast state (in case a previous instance died while muted)
