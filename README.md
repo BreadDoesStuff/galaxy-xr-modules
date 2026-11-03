@@ -1,9 +1,15 @@
 # Galaxy XR KernelSU Modules
 
+> [!IMPORTANT]
+> These modules have only been tested on ``I610UEU2AZF3`` firmware! They may not work on future releases.
+
 KernelSU modules for the Samsung Galaxy XR (SM-I610) running AndroidXR. All modules are non-invasive — none modify system files.
 Requires a rooted Samsung Galaxy XR with [KernelSU-GXR](https://github.com/4uva4ek/KernelSU-GXR).  
 
-Add this repository as a source within KernelSU with the url: ``https://github.com/BreadDoesStuff/galaxy-xr-modules``.
+Add this repository as a source within KernelSU with the url:  
+```
+https://github.com/BreadDoesStuff/galaxy-xr-modules
+```
 
 ## CAUTION
 Modules marked with (*) are experimental and may either have negative **performance impacts** or unintended effects. Further testing is required.
