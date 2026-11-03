@@ -11,8 +11,8 @@ Add this repository as a source within KernelSU with the url:
 https://github.com/BreadDoesStuff/galaxy-xr-modules
 ```
 
-## CAUTION
-Modules marked with (*) are experimental and may either have negative **performance impacts** or unintended effects. Further testing is required.
+> [!CAUTION]
+> Modules marked with (*) are experimental and may either have negative **performance impacts** or unintended effects. Further testing is required.
 
 That being said, Rooting your headset also carries these risks.
 
